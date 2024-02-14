@@ -4,8 +4,12 @@ import os.path
 
 def fileCreate(fileName):
     file = open(f"Notes/{fileName}.csv", "w")
+    noteTitle = input("Введите заголовок заметки:\n")
+    noteBody = input("Введите тело заметки:\n")
     id = Id()
     file.write(f"id: {id} \n")
+    file.write(f"{noteTitle} \n\n")
+    file.write(f"{noteBody} \n\n")
     date = datetime.datetime.now()
     dateFormat = datetime.datetime.strftime(date, '%d-%m-%Y %H:%M:%S')
     file.write(dateFormat)
