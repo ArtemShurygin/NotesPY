@@ -1,4 +1,5 @@
 import datetime
+import textwrap
 
 def fileCreate():
     id = Id()
@@ -7,7 +8,7 @@ def fileCreate():
     noteBody = input("Введите тело заметки:\n")
     file.write(f"id: {id} \n")
     file.write(f"{noteTitle} \n\n")
-    file.write(f"{noteBody} \n\n")
+    file.write(f"{noteBody} \n")
     date = datetime.datetime.now()
     dateFormat = datetime.datetime.strftime(date, '%d-%m-%Y %H:%M:%S')
     file.write(dateFormat)
@@ -27,3 +28,11 @@ def Id ():
         f.write(newIdStr)
         f.close()
     return newIdStr
+
+
+# Распечатывает заметку с переносом строки при достижении лимита символов в строке
+def notePrint(noteId):
+    with open(f"Notes/{noteId}.csv", "r", encoding="utf-8") as f:
+        noteRead = f.read()
+        print(textwrap.fill(noteRead, break_long_words=False, replace_whitespace=False))
+        f.close()
