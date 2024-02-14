@@ -2,14 +2,10 @@ import datetime
 import os.path
 
 
-def fileCreate(fileName, newId):
+def fileCreate(fileName):
     file = open(f"Notes/{fileName}.csv", "w")
-    file.write(f"Создана заметка с названием '{fileName}' \n")
-    if newId == 1:
-        id = Id()
-        file.write(f"{id} \n")
-    else:
-        file.write(f"old id \n")
+    id = Id()
+    file.write(f"id: {id} \n")
     date = datetime.datetime.now()
     dateFormat = datetime.datetime.strftime(date, '%d-%m-%Y %H:%M:%S')
     file.write(dateFormat)
@@ -21,8 +17,8 @@ def Id ():
         currentIdInt = int(currentIdStr)
         newIdInt = currentIdInt + 1
         newIdStr = str(newIdInt)
-        print(currentIdStr)
-        print(newIdStr)
+        print(f"Старый id: {currentIdStr}")
+        print(f"Новый id для текущего файла: {newIdStr}")
         f.close()
     with open("currentId.txt", "w") as f:
         f.write(newIdStr)
@@ -41,17 +37,17 @@ if command == "1":
         owerwrite = input("Заметка с таким названием уже существует, вы хотитете перезаписать заметку? "
               "Введите \"y\" (перезаписать заметку) или \"n\" (отменить действие): ")
         if owerwrite == "y":
-            NewId = 0
-            fileCreate(fileName, NewId)
+            fileCreate(fileName)
             print("Заметка перезаписана.")
         elif owerwrite == "n":
             print("Заметка не создана.")
         else:
             print("Введенной комманды нет в списке, заметка не создана.")
     else:
-        NewId = 1
-        fileCreate(fileName, NewId)
+        fileCreate(fileName)
         print("Заметка создана.")
+
+
 elif command == "2":
     print("Введенна  комманда 2.")
 elif command == "3":
