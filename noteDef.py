@@ -8,7 +8,7 @@ def fileCreate():
     noteTitle = input("Введите заголовок заметки:\n")
     noteBody = input("Введите тело заметки:\n")
     file.write(f"id: {id} \n")
-    file.write(f"{dateNow()}\n\n")
+    file.write(f"{dateNow()}\n")
     file.write(f"{noteTitle} \n\n")
     file.write(f"{noteBody}")
     file.close()
@@ -64,3 +64,8 @@ def noteDel():
     else:
         print(f"Заметки с id:{noteId} не существует.")
 
+def noteListSortDate():
+    os.chdir("Notes/")
+    notesList = sorted(filter(os.path.isfile, os.listdir(".")), key=os.path.getmtime)
+    os.chdir("..")
+    return notesList
