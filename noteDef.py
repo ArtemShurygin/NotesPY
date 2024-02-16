@@ -1,5 +1,6 @@
 import datetime
 import textwrap
+import os.path
 
 def fileCreate():
     id = Id()
@@ -54,4 +55,12 @@ def noteInBuffer(noteId):
         f.close()
     return noteData
 
+#Удаляет заметку по введенному id
+def noteDel():
+    noteId = input("Введите id заметки, которую Вы хотите удалить: ")
+    if os.path.exists(f"Notes/{noteId}.csv"):
+        os.remove(f"Notes/{noteId}.csv")
+        print(f"Заметка с id:{noteId} удалена.")
+    else:
+        print(f"Заметки с id:{noteId} не существует.")
 
